@@ -29,15 +29,17 @@ def is_valid(s):
                     if i == '0' and first_not_zero:
                         return False
                     
-                    # if all previous conditions are satisfied and first number isn't a '0'
-                    # then last step (checking whether the rest of an input-including first number per se
-                    # - is digit) 
-                    if s[s.index(i):].isdigit():
+                    # in case first number is not zero we explicitly tell it to program by
+                    # assigning first_non_zero a False value
+                    # purposefully stating, because first number is not '0',
+                    # there is no need to check whether '0' comes in the rest part
+                    first_not_zero = False
 
-                        # purposefully stating, because first number is not '0',
-                        # there is no need to check whether '0' comes in the rest part
-                        first_not_zero = False
-                        continue
+                    # if all previous conditions are satisfied and first number isn't a '0'
+                    # then last step (checking whether the rest of an input is digit) 
+                    if not s[s.index(i):].isnumeric():
+                        return False
+                    continue
             return True
     return False
                       
@@ -47,4 +49,5 @@ def chars_check(s):
     """
     return " " not in s and "." not in s and "," not in s
 
-main()
+if __name__ == "__main__":
+    main()

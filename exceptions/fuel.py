@@ -1,19 +1,21 @@
+import sys
+
 def main():
-    percentage = fuel_fraction("Fraction: ")
+    fraction = input("Fraction: ")
+    print(convert(fraction))
 
-    print(evaluate(percentage))
+def convert(s):
+    try:
+        X, Y = list(map(int, s.split('/')))
+        if X > Y:
+            sys.exit("Incorrect sets of ")
+        
+        return gauge(X, Y)
+    except (ValueError, ZeroDivisionError):
+        sys.exit("Either value is not an integer or zero is in denominator")
 
-def fuel_fraction(s):
-    while True:
-        try:
-            X, Y = list(map(int, input(s).split("/")))
-
-            if X > Y:
-                continue
-            
-            return int(float(X / Y) * 100)
-        except (ValueError, ZeroDivisionError):
-            pass
+def gauge(X, Y):
+    return evaluate(int(float(X / Y) * 100))
 
 def evaluate(percentage):
     if percentage <= 1:
@@ -22,4 +24,5 @@ def evaluate(percentage):
         return "F"
     return f"{percentage}%"
 
-main()
+if __name__ == "__main__":
+    main()
